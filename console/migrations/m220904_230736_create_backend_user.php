@@ -18,6 +18,12 @@ class m220904_230736_create_backend_user extends Migration
             'username' =>$this->string(),
             'password' => $this->string(),
         ]);
+        
+        $this->insert('{{%backend_user}}',[
+            'name' => 'admin@website.com',
+            'username' => 'admin@website.com',
+            'password' => 'MoreandMore#789'
+        ]);
     }
 
     /**

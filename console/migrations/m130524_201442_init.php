@@ -19,13 +19,6 @@ class m130524_201442_init extends Migration
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'password' => $this->string()->notNull()->unique(),
         ], $tableOptions);
-
-        $this->insert('{{%user}}',[
-            'username' => ' admin@website.com',
-            'email' => ' admin@website.com',
-            'status' => 10,
-            'password' => ' MoreandMore#789'
-        ]);
     }
 
     public function down()
