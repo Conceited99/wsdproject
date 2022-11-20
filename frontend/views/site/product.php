@@ -124,24 +124,29 @@ use yii\helpers\Html;
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
 <body>
-    <div class="container">
-            <?php
+  <div class="content-body">
+    <div class="row">
+      <div class="list-view">
+        <div class="col-lg-4 col-md-6 mb-4" style = "width: 100%;">
+          <?php
             foreach ($data as $row) {
-            ?>
-            <div class="left-column">
-                    <a href="detail?id=<? $row['code'] ?>"><?php echo Html::img('@web/../../backend/web/uploads' . $row['image'], ['class' => 'img']); ?></a>
-            </div>
-            <div class="right-column">
-
-                <div class="product-description">
-                    <h1><b><?= $row['name'] ?></b></h1>
-                    <p><?= $row['description'] ?></p>
+              ?>
+              <div class="card h-100" style="float: left; max-width: 31%; margin: 10px">
+                <a href="detail?id=<? $row['code'] ?>"><?php echo Html::img('@web/../../backend/web/uploads' . $row['image'], ['class' => 'img', 'width' => '340', 'height' => '340']); ?></a>
+                <div class="card-body" style="text-align: center;">
+                  <h1><b><?= $row['name'] ?></b></h1>
+                  <p><?= $row['description'] ?></p>
+                  <b><span>$<?= $row['Cost'] ?></span></b>
+                  <br>
+                  <?= Html::a('Add to Cart', ['add-to-cart', 'code' => $row->code], ['class' => 'btn btn-success']) ?>
                 </div>
-                <div class="product-price">
-                    <b><span>$<?= $row['Cost'] ?></span></b>
-                    <?= Html::a('Add to Cart', ['add-to-cart', 'code' => $row->code], ['class' => 'btn btn-success']) ?>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                 </div>
-            </div>
-    <?php } ?>
+              </div>
+              <?php } ?>
+          <div>
+        </div>
+      <div>
     </div>
-</body>
+  </body>

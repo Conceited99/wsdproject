@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Products';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="product-index">
 

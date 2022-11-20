@@ -9,6 +9,12 @@ use yii\bootstrap5\Html;
 
 $this->title = 'Login';
 ?>
+<style>
+    body {
+        background-color: #000;
+        color: white;
+    }
+</style>
 <div class="site-login">
     <div class="mt-5 offset-lg-3 col-lg-6">
         <h1><?= Html::encode($this->title) ?></h1>

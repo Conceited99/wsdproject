@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use Yii;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -56,6 +57,13 @@ class ProductController extends Controller
      */
     public function actionView($code)
     {
+        $id = Yii::$app->user->identity;
+        if($id == null)
+        {
+            Yii::$app->session->setFlash('error', "Please sign in to View Products.");
+            return $this->redirect(['site/login']);
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($code),
         ]);
@@ -68,6 +76,13 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
+        $id = Yii::$app->user->identity;
+        if($id == null)
+        {
+            Yii::$app->session->setFlash('error', "Please sign in to Create Products.");
+            return $this->redirect(['site/login']);
+        }
+
         $model = new Product();
 
         if ($this->request->isPost) {
@@ -95,6 +110,13 @@ class ProductController extends Controller
      */
     public function actionUpdate($code)
     {
+        $id = Yii::$app->user->identity;
+        if($id == null)
+        {
+            Yii::$app->session->setFlash('error', "Please sign in to Update Products.");
+            return $this->redirect(['site/login']);
+        }
+
         $model = $this->findModel($code);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -115,6 +137,13 @@ class ProductController extends Controller
      */
     public function actionDelete($code)
     {
+        $id = Yii::$app->user->identity;
+        if($id == null)
+        {
+            Yii::$app->session->setFlash('error', "Please sign in to Delete Products.");
+            return $this->redirect(['site/login']);
+        }
+
         $this->findModel($code)->delete();
 
         return $this->redirect(['index']);

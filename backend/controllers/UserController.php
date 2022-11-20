@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\SearchUser;
 use common\models\User;
 use yii\web\NotFoundHttpException;
+use Yii;
 
 class UserController extends \yii\web\Controller
 {
@@ -26,6 +27,12 @@ class UserController extends \yii\web\Controller
      */
     public function actionView($id)
     {
+        $id = Yii::$app->user->identity;
+        if($id == null)
+        {
+            Yii::$app->session->setFlash('error', "Please sign in to View Users.");
+            return $this->redirect(['site/login']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -38,6 +45,12 @@ class UserController extends \yii\web\Controller
      */
     public function actionCreate()
     {
+        $id = Yii::$app->user->identity;
+        if($id == null)
+        {
+            Yii::$app->session->setFlash('error', "Please sign in to create Users.");
+            return $this->redirect(['site/login']);
+        }
         $model = new User();
 
         if ($this->request->isPost) {
@@ -60,6 +73,13 @@ class UserController extends \yii\web\Controller
      */
     public function actionUpdate($id)
     {
+        $id = Yii::$app->user->identity;
+        if($id == null)
+        {
+            Yii::$app->session->setFlash('error', "Please sign in to update Users.");
+            return $this->redirect(['site/login']);
+        }
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -80,6 +100,13 @@ class UserController extends \yii\web\Controller
      */
     public function actionDelete($id)
     {
+        $id = Yii::$app->user->identity;
+        if($id == null)
+        {
+            Yii::$app->session->setFlash('error', "Please sign in to delete Users.");
+            return $this->redirect(['site/login']);
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
